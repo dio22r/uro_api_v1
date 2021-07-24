@@ -4,13 +4,13 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Projectmember extends Migration
+class Tindakanmember extends Migration
 {
 	public function up()
 	{
 
 		$this->forge->addField([
-			'id_project_member' => [
+			'id_tindakan_member' => [
 				'type' => 'BIGINT',
 				'unsigned' => true,
 				'auto_increment' => true,
@@ -30,7 +30,7 @@ class Projectmember extends Migration
 			'id_karyawan' => [
 				'type' => "bigint"
 			],
-			'id_project' => [
+			'id_tindakan' => [
 				'type' => "bigint"
 			],
 			'status' => [
@@ -39,15 +39,15 @@ class Projectmember extends Migration
 			]
 		]);
 
-		$this->forge->addKey('id_project_member', true);
-		$this->forge->addKey('id_project');
+		$this->forge->addKey('id_tindakan_member', true);
+		$this->forge->addKey('id_tindakan');
 		$this->forge->addKey('id_karyawan');
 
-		$this->forge->createTable('project_member');
+		$this->forge->createTable('tindakan_member');
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('project_member');
+		$this->forge->dropTable('tindakan_member');
 	}
 }

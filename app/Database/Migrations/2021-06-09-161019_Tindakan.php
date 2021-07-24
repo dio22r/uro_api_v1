@@ -15,21 +15,22 @@ class Tindakan extends Migration
 				'auto_increment' => true,
 			],
 			'created_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
 			'updated_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
 			'deleted_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
-			'id_karyawan' => [
-				'type' => 'varchar',
-				'constraint' => 45,
-				'null' => true,
+			'id_karyawan' => [ // manager
+				'type' => 'bigint',
+			],
+			'id_project' => [
+				'type' => 'BIGINT',
 			],
 			'tanggal' => [
 				'type' => 'date',
@@ -51,9 +52,6 @@ class Tindakan extends Migration
 			'status' => [
 				'type' => 'varchar',
 				'constraint' => 4,
-			],
-			'id_project' => [
-				'type' => 'BIGINT',
 			],
 		]);
 		$this->forge->addKey('id_tindakan', true);

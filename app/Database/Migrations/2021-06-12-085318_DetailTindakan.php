@@ -15,19 +15,25 @@ class DetailTindakan extends Migration
 				'auto_increment' => true,
 			],
 			'created_at' => [
-				'type' => "timestamp",
-				"null" => true
+				'type' => 'datetime',
+				'null' => true
 			],
 			'updated_at' => [
-				'type' => "timestamp",
-				"null" => true
+				'type' => 'datetime',
+				'null' => true
 			],
 			'deleted_at' => [
-				'type' => "timestamp",
-				"null" => true
+				'type' => 'datetime',
+				'null' => true
 			],
-			'id_karyawan' => [
+			'id_karyawan_create' => [
 				'type' => "BIGINT"
+			],
+			'id_karyawan_complete' => [
+				'type' => "BIGINT"
+			],
+			'id_tindakan' => [
+				'type' => "bigint",
 			],
 			'tanggal' => [
 				'type' => "date"
@@ -42,16 +48,15 @@ class DetailTindakan extends Migration
 				'type' => "varchar",
 				'constraint' => 45
 			],
-			'id_project' => [
-				'type' => "bigint"
-			],
-			'id_tindakan' => [
-				'type' => "bigint",
+			'status' => [
+				'type' => 'int',
+				'constraint' => 4
 			]
 		]);
 
 		$this->forge->addKey('id_tindakan_detail', true);
-		$this->forge->addKey('id_project');
+		$this->forge->addKey('id_karyawan_create');
+		$this->forge->addKey('id_karyawan_complete');
 		$this->forge->addKey('id_tindakan');
 
 		$this->forge->createTable('detail_tindakan');

@@ -15,15 +15,15 @@ class Project extends Migration
 				'auto_increment' => true,
 			],
 			'created_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
 			'updated_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
 			'deleted_at' => [
-				'type' => 'timestamp',
+				'type' => 'datetime',
 				'null' => true
 			],
 			'id_karyawan' => [
