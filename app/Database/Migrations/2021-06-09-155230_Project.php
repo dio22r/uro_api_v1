@@ -36,9 +36,9 @@ class Project extends Migration
 				'constraint' => 45,
 				'null' => true,
 			],
-			'status' => [
+			'nama_perusahaan' => [
 				'type' => 'varchar',
-				'constraint' => 5,
+				'constraint' => 45,
 				'null' => true,
 			],
 			'tanggal_mulai' => [
@@ -53,6 +53,10 @@ class Project extends Migration
 				'type' => 'varchar',
 				'constraint' => 45,
 				'null' => true,
+			],
+			'status' => [
+				'type' => 'int',
+				'constraint' => 5,
 			],
 		]);
 		$this->forge->addKey('id_project', true);

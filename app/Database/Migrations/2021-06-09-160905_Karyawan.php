@@ -117,7 +117,7 @@ class Karyawan extends Migration
 			'kode_reset' => [
 				'type' => 'varchar',
 				'constraint' => 255,
-				'null' => false,
+				'null' => true,
 			],
 		]);
 
