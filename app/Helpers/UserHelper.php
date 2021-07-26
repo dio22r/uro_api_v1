@@ -2,9 +2,6 @@
 
 namespace App\Helpers;
 
-use \App\Entities\UserEntity;
-use Faker\Provider\Uuid;
-
 class UserHelper
 {
   public function __construct()
@@ -33,9 +30,11 @@ class UserHelper
       $regId = $this->userModel->getInsertID();
 
       if ($status) {
+        $arrData = $this->userModel->find($regId);
         $arrJson = [
           'status' => true,
           'msg' => 'Data telah tersimpan',
+          'arrData' => $arrData
         ];
       } else {
         $arrJson = [
@@ -76,12 +75,13 @@ class UserHelper
       $arrErr["password_old"] = "Password Lama Tidak Sesuai";
     }
 
-    if (trim($new) != "") {
+    if (trim($new) == "") {
       $arrErr["password"] = "Harap Mengisi Password baru";
     }
 
     if (!$arrErr) {
       $arrData["password"] = $new;
+      $this->_set_pwd_rules();
       $status = $this->userModel->update($id, $arrData);
       if (!$status) {
         $arrErr = $this->userModel->errors();

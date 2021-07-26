@@ -75,8 +75,44 @@ class UserController extends BaseController
 		$arrRes = $this->userHelper->insert_data($arrData);
 
 		if ($arrRes["status"]) {
-			// send email activation
+			$title = "URO APPS: New User Registration";
+
+			$code = $arrRes["arrData"]["kode_aktivasi"];
+			$arrView = [
+				"title" => $title,
+				"nama" => $arrData["nama"],
+				"url" => base_url("/api/aktivasi/" . $code)
+			];
+
+			$html = view("email/forgot_password", $arrView);
+			$result = $this->userHelper->send_mail($arrData["email"], $title, $html);
 		}
+
+		return $this->respond($arrRes, 200);
+	}
+
+	public function resend_aktivasi()
+	{
+		$email = $this->request->getPost("email");
+
+		$arrData = $this->userModel->where("email", $email)->first();
+
+		$result = false;
+		if ($arrData) {
+			$title = "URO APPS: New User Registration";
+
+			$code = $arrData["kode_aktivasi"];
+			$arrView = [
+				"title" => $title,
+				"nama" => $arrData["nama"],
+				"url" => base_url("/api/aktivasi/" . $code)
+			];
+
+			$html = view("email/aktivasi_email", $arrView);
+			$result = $this->userHelper->send_mail($arrData["email"], $title, $html);
+		}
+
+		$arrRes = ["status" => $result];
 
 		return $this->respond($arrRes, 200);
 	}
@@ -136,7 +172,7 @@ class UserController extends BaseController
 				$arrView = [
 					"title" => $title,
 					"nama" => $arrData["nama"],
-					"url" => base_url("/api/forgot/" . $kodeReset)
+					"url" => base_url("/api/reset_password/" . $kodeReset)
 				];
 
 				$html = view("email/forgot_password", $arrView);
@@ -154,45 +190,52 @@ class UserController extends BaseController
 		$newpassword = substr(md5(rand()), 0, 8);
 
 		$arrWhere = ["kode_reset" => $code];
-		$result = $this->userModel->where($arrWhere)
-			->set(['password' => $newpassword])
-			->update();
+		$arrData = $this->userModel->where($arrWhere)->first();
 
 		$arrReady = [
 			'status' => false,
 			'msg' => "reset password gagal",
-			'arr_data' => [],
 		];
 
-		if ($result) {
-			$arrWhere = array("kode_aktivasi" => $code, "status" => 1);
-			$result = $this->userModel->where($arrWhere)->first();
+		if ($arrData) {
+			$result = $this->userModel->where($arrWhere)
+				->set([
+					'password' => $newpassword,
+					'kode_reset' => ""
+				])
+				->update();
 
 			if ($result) {
 				$arrReady = [
 					'status' => true,
 					'msg' => "Reset Sukses",
-					'arr_data' => [
-						'email' => $result["email"],
-						"password" => $newpassword
-					]
 				];
+
+				$title = "URO APPS: New Password";
+				$arrView = [
+					"title" => $title,
+					"nama" => $arrData["nama"],
+					"email" => $arrData["email"],
+					"password" => $newpassword
+				];
+
+				$html = view("email/reset_password", $arrView);
+				$result = $this->userHelper->send_mail($arrData["email"], $title, $html);
 			}
 		}
 
-		return $this->respond($arrReady, 200);
+		return view("email/vw_reset_password", $arrReady);
 	}
 
-	public function view_email()
-	{
-		$arrView = [
-			"title" => "test",
-			"nama" => "Nama",
-			"url" => "#"
-		];
+	// public function view_email()
+	// {
+	// 	$arrView = [
+	// 		'status' => true,
+	// 		'msg' => "Reset Sukses",
+	// 	];
 
-		return view("email/forgot_password", $arrView);
-	}
+	// 	return view("email/vw_reset_password", $arrView);
+	// }
 
 	public function show()
 	{
@@ -255,8 +298,7 @@ class UserController extends BaseController
 	{
 		$arrDet = $this->userHelper->change_password(
 			$this->request->getPost("password_old"),
-			$this->request->getPost("password"),
-			$this->request->getPost("re_password")
+			$this->request->getPost("password")
 		);
 
 		$arrRes = [
