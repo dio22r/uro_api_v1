@@ -33,49 +33,52 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 
-$routes->post('/api/login', 'UserController::login');
-$routes->get('/api/logout', 'UserController::logout');
-$routes->post('/api/register', 'UserController::register');
-$routes->get('/api/aktivasi/(:segment)', 'UserController::aktivasi/$1');
-$routes->post('/api/aktivasi', 'UserController::resend_aktivasi');
-$routes->post('/api/forgot', 'UserController::forgot_password');
-$routes->get('/api/reset_password/(:segment)', 'UserController::reset_password/$1');
+$routes->post('/api/login', 'UserController::login'); // **
+$routes->get('/api/logout', 'UserController::logout'); // **
+$routes->post('/api/register', 'UserController::register'); // **
+$routes->get('/api/aktivasi/(:segment)', 'UserController::aktivasi/$1'); // **
+$routes->post('/api/aktivasi', 'UserController::resend_aktivasi'); // **
+$routes->post('/api/forgot', 'UserController::forgot_password'); // **
+$routes->get('/api/reset_password/(:segment)', 'UserController::reset_password/$1'); // **
 
 // $routes->get('/api/view_email', 'UserController::view_email');
 
-$routes->get('/api/user', 'UserController::show');
-$routes->post('/api/user/profile', 'UserController::update');
-$routes->post('/api/user/akun', 'UserController::update_akun');
-$routes->post('/api/user/password', 'UserController::update_password');
+$routes->get('/api/user', 'UserController::show'); // **
+$routes->post('/api/user/profile', 'UserController::update'); // **
+$routes->post('/api/user/akun', 'UserController::update_akun'); // **
+$routes->post('/api/user/password', 'UserController::update_password'); // **
 
-$routes->get('/api/proyekku', 'ProyekkuController::index');
-$routes->get('/api/proyekku/(:num)', 'ProyekkuController::show/$1');
-
-// level manager
-$routes->post('/api/proyekku', 'ProyekkuController::create');
-$routes->put('/api/proyekku/(:num)', 'ProyekkuController::update/$1');
-$routes->delete('/api/proyekku/(:num)', 'ProyekkuController::delete/$1');
-
-
-$routes->get('/api/proyekku/(:num)/todo', 'TodoController::index/$1');
+$routes->get('/api/proyekku', 'ProyekkuController::index'); // **
+$routes->get('/api/proyekku/(:num)', 'ProyekkuController::show/$1'); // **
 
 // level manager
-$routes->post('/api/proyekku/(:num)/todo', 'TodoController::create/$1');
-$routes->put('/api/proyekku/todo/(:num)', 'TodoController::update/$1');
+$routes->post('/api/proyekku', 'ProyekkuController::create'); // **
+$routes->put('/api/proyekku/(:num)', 'ProyekkuController::update/$1'); // **
+$routes->delete('/api/proyekku/(:num)', 'ProyekkuController::delete/$1'); // **
 
 
-$routes->get('/api/proyekku/todo/(:num)/detail', 'TodoDetailController::index/$1');
-$routes->post('/api/proyekku/todo/(:num)/detail', 'TodoDetailController::insert/$1');
-$routes->put('/api/proyekku/todo/detail/(:num)', 'TodoDetailController::update/$1');
-$routes->delete('/api/proyekku/todo/detail/(:num)', 'TodoDetailController::delete/$1');
+$routes->get('/api/proyekku/(:num)/tugas', 'TindakanController::index/$1'); // **
+$routes->get('/api/proyekku/tugas/(:num)', 'TindakanController::show/$1'); // **
+
+// level manager
+$routes->post('/api/proyekku/(:num)/tugas', 'TindakanController::create/$1'); // **
+$routes->put('/api/proyekku/tugas/(:num)', 'TindakanController::update/$1'); // **
 
 
-$routes->get('/api/rekanku', 'RekankuController::index');
-$routes->get('/api/rekanku/(:num)', 'RekankuController::show/$1');
+$routes->get('/api/proyekku/tugas/(:num)/detail', 'TindakanDetailController::index/$1'); // **
+$routes->post('/api/proyekku/tugas/(:num)/detail', 'TindakanDetailController::insert/$1'); // **
+$routes->get('/api/proyekku/tugas/detail/(:num)', 'TindakanDetailController::show/$1'); // **
+$routes->put('/api/proyekku/tugas/detail/(:num)', 'TindakanDetailController::update/$1'); // **
+$routes->delete('/api/proyekku/tugas/detail/(:num)', 'TindakanDetailController::delete/$1'); // **
+
+$routes->get('/api/tugasku', 'TugaskuController::index'); // **
+
+$routes->get('/api/rekanku', 'RekankuController::index'); // **
+$routes->get('/api/rekanku/(:num)', 'RekankuController::show/$1'); // **
 
 
-$routes->get('/api/tugasku', 'TugaskuController::index');
-$routes->get('/api/tugasku/(:num)', 'TugaskuController::show/$1');
+
+// $routes->get('/api/tugasku/(:num)', 'TugaskuController::show/$1'); 
 
 
 /**

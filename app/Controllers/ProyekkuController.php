@@ -98,6 +98,14 @@ class ProyekkuController extends BaseController
 
 	public function delete($id)
 	{
+		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
+			$arrRes = [
+				"status" => false,
+				"msg" => "Operation Not Allowed"
+			];
+			return $this->respond($arrRes, 401);
+		}
+
 		$arrData = $this->projectModel
 			->where("id_karyawan", $this->userId)
 			->where("id_project", $id)

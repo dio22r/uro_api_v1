@@ -1,0 +1,82 @@
+{
+  "paths": {
+    "/proyekku" : {
+      "get": {
+        "summary": "get all proyek",
+        "parameters": {},
+        "response": {}
+      },
+      "post": {
+        "summary": "create new proyek",
+        "parameters": [
+          {
+            "name": "nama_project",
+            "type": "string",
+            "in": "query", 
+            "description": "",
+            "required": true
+          },
+          {
+            "name": "nama_perusahaan",
+            "type": "string",
+            "in": "query", 
+            "description": "",
+            "required": true
+          },
+          {
+            "name": "karyawan[]",
+            "type": "int",
+            "in": "query",
+            "description": "",
+            "required": true
+          }
+        ],
+        "response": {}
+      }
+    },
+    "/proyekku/{idProyek}": {
+      "get": {
+        "summary": "get detail proyek",
+        "response": {}
+      },
+      "put": {
+        "summary": "edit proyek",
+        "parameters": [
+          {
+            "name": "nama_project",
+            "type": "string",
+            "in": "query", 
+            "description": "",
+            "required": true
+          },
+          {
+            "name": "nama_perusahaan",
+            "type": "string",
+            "in": "query", 
+            "description": "",
+            "required": true
+          },
+          {
+            "name": "karyawan[]",
+            "type": "int",
+            "in": "query",
+            "description": "",
+            "required": true
+          },
+          {
+            "name": "del_karyawan[]",
+            "type": "int",
+            "in": "query",
+            "description": "",
+            "required": true
+          }
+        ],
+        "response": {}
+      },
+      "delete": {
+        "summary": "delete proyek",
+        "response": {}
+      }
+    }
+  }
+}

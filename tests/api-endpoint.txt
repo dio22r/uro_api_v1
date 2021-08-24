@@ -1,0 +1,23 @@
+POST api/register ["username", "password", "email"]
+POST api/login ["username", "password"]
+
+GET api/user (session->id)
+POST api/user/akun ["username", "email"]
+POST api/user/password ["password", "password_baru"]
+POST api/user/profile [all field karyawan]
+
+
+GET api/logout
+
+
+
+tugasku/ (index, create, show, update, delete)
+
+rekanku/ (index, show)
+
+myproject/ (index, create, show, update, delete)
+
+myproject/ ::create / ::update / ::delete -> owner
+
+myproject/ ::index / ::show -> owner, karyawan (hanya related)
+

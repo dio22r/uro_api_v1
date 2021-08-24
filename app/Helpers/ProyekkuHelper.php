@@ -147,11 +147,13 @@ class ProyekkuHelper
       $status = $this->projectModel->save($arrUpdate);
 
       if ($status) {
-        foreach ($arrUpdate["del_karyawan"] as $key => $val) {
-          $this->projectMemberModel
-            ->where("id_project", $id)
-            ->where("id_karyawan", $val)
-            ->delete();
+        if (isset($arrUpdate["del_karyawan"])) {
+          foreach ($arrUpdate["del_karyawan"] as $key => $val) {
+            $this->projectMemberModel
+              ->where("id_project", $id)
+              ->where("id_karyawan", $val)
+              ->delete();
+          }
         }
 
         foreach ($arrUpdate["karyawan"] as $key => $val) {
