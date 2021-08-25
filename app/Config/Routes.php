@@ -60,6 +60,8 @@ $routes->delete('/api/proyekku/(:num)', 'ProyekkuController::delete/$1'); // **
 $routes->get('/api/proyekku/(:num)/tugas', 'TindakanController::index/$1'); // **
 $routes->get('/api/proyekku/tugas/(:num)', 'TindakanController::show/$1'); // **
 
+$routes->get('/api/proyekku/(:num)/member', 'ProjectmemberController::index/$1');
+
 // level manager
 $routes->post('/api/proyekku/(:num)/tugas', 'TindakanController::create/$1'); // **
 $routes->put('/api/proyekku/tugas/(:num)', 'TindakanController::update/$1'); // **
