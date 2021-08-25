@@ -150,7 +150,7 @@ class UserController extends BaseController
 
 	public function forgot_password()
 	{
-		$email = $this->request->getPost();
+		$email = $this->request->getPost("email");
 
 		$arrData = $this->userModel
 			->where("email", $email)
