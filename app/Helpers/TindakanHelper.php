@@ -40,7 +40,7 @@ class TindakanHelper
       $arrTindakan["detail"] = $this->tindakanDetailModel->where("id_tindakan", $idTindakan)->findAll();
 
       $status = true;
-      $msg = "Oke1";
+      $msg = "Oke";
     }
 
     return [
