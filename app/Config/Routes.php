@@ -41,6 +41,8 @@ $routes->post('/api/aktivasi', 'UserController::resend_aktivasi'); // **
 $routes->post('/api/forgot', 'UserController::forgot_password'); // **
 $routes->get('/api/reset_password/(:segment)', 'UserController::reset_password/$1'); // **
 
+$routes->get('/api/check-login', 'UserController::checklogin');
+
 // $routes->get('/api/view_email', 'UserController::view_email');
 
 $routes->get('/api/user', 'UserController::show'); // **

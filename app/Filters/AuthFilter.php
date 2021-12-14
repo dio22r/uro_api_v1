@@ -31,6 +31,7 @@ class AuthFilter implements FilterInterface
 		$userHelper = new UserHelper();
 		if ($userHelper->check_login() === false) {
 			$arrData = [
+				"is_login" => false,
 				"status" => false,
 				"msg" => "Anda belum login"
 			];

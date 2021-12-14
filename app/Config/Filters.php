@@ -64,7 +64,8 @@ class Filters extends BaseConfig
 		"authfilter" => [
 			"before" => [
 				"api/user*", "api/proyekku*",
-				"api/rekanku*", "api/tugasku*"
+				"api/rekanku*", "api/tugasku*",
+				"api/check-login"
 			]
 		]
 	];

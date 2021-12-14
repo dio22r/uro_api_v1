@@ -27,6 +27,7 @@ class TindakanController extends BaseController
 	{
 		$result = $this->tindakanHelper->json_table($idProject);
 
+		$result["is_login"] = true;
 		return $this->respond($result);
 	}
 
@@ -34,6 +35,7 @@ class TindakanController extends BaseController
 	{
 		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
 			$arrRes = [
+				"is_login" => true,
 				"status" => false,
 				"msg" => "Operation Not Allowed"
 			];
@@ -44,6 +46,7 @@ class TindakanController extends BaseController
 
 		$result = $this->tindakanHelper->insert_tindakan($idProject, $arrData);
 
+		$result["is_login"] = true;
 		return $this->respond($result);
 	}
 
@@ -51,6 +54,7 @@ class TindakanController extends BaseController
 	{
 		$result = $this->tindakanHelper->get_tindakan_detail($idTindakan);
 
+		$result["is_login"] = true;
 		return $this->respond($result);
 	}
 
@@ -58,6 +62,7 @@ class TindakanController extends BaseController
 	{
 		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
 			$arrRes = [
+				"is_login" => true,
 				"status" => false,
 				"msg" => "Operation Not Allowed"
 			];
@@ -68,6 +73,7 @@ class TindakanController extends BaseController
 
 		$result = $this->tindakanHelper->update_tindakan($idTindakan, $arrData);
 
+		$result["is_login"] = true;
 		return $this->respond($result);
 	}
 
@@ -81,6 +87,6 @@ class TindakanController extends BaseController
 			return $this->respond($arrRes, 401);
 		}
 
-		$this->tindakanModel->delete($idTindakan);
+		// $this->tindakanModel->delete($idTindakan);
 	}
 }

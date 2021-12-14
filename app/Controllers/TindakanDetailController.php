@@ -26,6 +26,7 @@ class TindakanDetailController extends BaseController
 			->findAll();
 
 		return $this->respond([
+			"is_login" => true,
 			"data" => $arrData
 		]);
 	}
@@ -35,6 +36,7 @@ class TindakanDetailController extends BaseController
 		$arrData = $this->tindakanDetailModel->find($idDetail);
 
 		return $this->respond([
+			"is_login" => true,
 			"data" => $arrData
 		]);
 	}
@@ -48,6 +50,7 @@ class TindakanDetailController extends BaseController
 		$status = $this->tindakanDetailModel->save($arrPost);
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => $status
 		]);
 	}
@@ -61,6 +64,7 @@ class TindakanDetailController extends BaseController
 		$arrData = $this->tindakanDetailModel->find($idDetail);
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => $status,
 			"data" => $arrData
 		]);
@@ -76,6 +80,7 @@ class TindakanDetailController extends BaseController
 		}
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => $status
 		]);
 	}

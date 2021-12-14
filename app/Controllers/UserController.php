@@ -17,6 +17,14 @@ class UserController extends BaseController
 		$this->session = \Config\Services::session();
 	}
 
+	public function checklogin()
+	{
+		return $this->respond([
+			"is_login" => true,
+			"status" => true,
+			"msg" => "Anda Sudah Login"
+		]);
+	}
 
 	public function login()
 	{
@@ -45,6 +53,7 @@ class UserController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => $status,
 			"status" => $status,
 			"msg" => $msg
 		];
@@ -57,6 +66,7 @@ class UserController extends BaseController
 		$this->session->destroy();
 
 		$arrRes = [
+			"is_login" => false,
 			"status" => true,
 			"msg" => "Logout Berhasil"
 		];
@@ -84,10 +94,11 @@ class UserController extends BaseController
 				"url" => base_url("/api/aktivasi/" . $code)
 			];
 
-			$html = view("email/forgot_password", $arrView);
+			$html = view("email/aktivasi_email", $arrView);
 			$result = $this->userHelper->send_mail($arrData["email"], $title, $html);
 		}
 
+		$arrRes["islogin"] = false;
 		return $this->respond($arrRes, 200);
 	}
 
@@ -112,7 +123,10 @@ class UserController extends BaseController
 			$result = $this->userHelper->send_mail($arrData["email"], $title, $html);
 		}
 
-		$arrRes = ["status" => $result];
+		$arrRes = [
+			"is_login" => false,
+			"status" => $result
+		];
 
 		return $this->respond($arrRes, 200);
 	}
@@ -127,6 +141,7 @@ class UserController extends BaseController
 			->update();
 
 		$arrReady = [
+			"is_login" => false,
 			'status' => false,
 			'msg' => "Maaf ya, sepertinya ada kesalahan kode aktifasi mohon diperiksa lagi atau silahkan hubungi kami.",
 			'arr_data' => [],
@@ -180,6 +195,7 @@ class UserController extends BaseController
 			}
 		}
 
+		$result["is_login"] = false;
 		return $this->respond($result, 200);
 	}
 
@@ -224,6 +240,7 @@ class UserController extends BaseController
 			}
 		}
 
+		$arrReady["is_login"] = false;
 		return view("email/vw_reset_password", $arrReady);
 	}
 
@@ -242,6 +259,7 @@ class UserController extends BaseController
 		$arrReady = $this->userModel
 			->find($this->userHelper->get_login_info()["id"]);
 
+		$arrReady["is_login"] = true;
 		return $this->respond($arrReady, 200);
 	}
 
@@ -260,6 +278,7 @@ class UserController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $status,
 			"arrErr" => $this->userModel->errors()
 		];
@@ -287,6 +306,7 @@ class UserController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $status,
 			"arrErr" => $arrErr
 		];
@@ -302,6 +322,7 @@ class UserController extends BaseController
 		);
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $arrDet["status"],
 			"arrErr" => $arrDet["arrErr"]
 		];

@@ -25,6 +25,7 @@ class RekankuController extends BaseController
 		$arrRekan = $this->rekankuHelper->findAll();
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => true,
 			"data" => $arrRekan
 		]);
@@ -35,6 +36,7 @@ class RekankuController extends BaseController
 		$arrData = $this->rekankuHelper->find($idKaryawan);
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => true,
 			"data" => $arrData
 		]);

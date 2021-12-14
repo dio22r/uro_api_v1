@@ -39,6 +39,7 @@ class ProyekkuController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $status,
 			"arrData" => $arrData,
 			"nextPage" => $nextPage
@@ -51,6 +52,7 @@ class ProyekkuController extends BaseController
 	{
 		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
 			$arrRes = [
+				"is_login" => true,
 				"status" => false,
 				"msg" => "Operation Not Allowed"
 			];
@@ -60,6 +62,7 @@ class ProyekkuController extends BaseController
 		$arrInsert = $this->request->getPost();
 		$arrRes = $this->proyekkuHelper->insert_project($arrInsert);
 
+		$arrRes["is_login"] = true;
 		return $this->respond($arrRes, 200);
 	}
 
@@ -73,6 +76,7 @@ class ProyekkuController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $status,
 			"arrData" => $arrData
 		];
@@ -84,6 +88,7 @@ class ProyekkuController extends BaseController
 	{
 		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
 			$arrRes = [
+				"is_login" => true,
 				"status" => false,
 				"msg" => "Operation Not Allowed"
 			];
@@ -93,6 +98,7 @@ class ProyekkuController extends BaseController
 		$arrUpdate = (array) $this->request->getJSON();
 		$arrRes = $this->proyekkuHelper->update_project($id, $arrUpdate);
 
+		$arrRes["is_login"] = true;
 		return $this->respond($arrRes, 200);
 	}
 
@@ -100,6 +106,7 @@ class ProyekkuController extends BaseController
 	{
 		if (!in_array($this->userRole, $this->arrRoleUserEdit)) {
 			$arrRes = [
+				"is_login" => true,
 				"status" => false,
 				"msg" => "Operation Not Allowed"
 			];
@@ -121,6 +128,7 @@ class ProyekkuController extends BaseController
 		}
 
 		$arrRes = [
+			"is_login" => true,
 			"status" => $status,
 			"msg" => $msg
 		];

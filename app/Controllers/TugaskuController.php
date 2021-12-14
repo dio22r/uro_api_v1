@@ -36,6 +36,7 @@ class TugaskuController extends BaseController
 		}
 
 		return $this->respond([
+			"is_login" => true,
 			"status" => true,
 			"data" => $arrTindakan
 		]);
